@@ -31,5 +31,28 @@ const functionWithTheBirthCountry = printPersonDescription.bind(person, "US");
 functionWithTheBirthCountry();
 
 //With Event Listers
+const btnTeste = document.querySelector(".btnTeste");
+
+const testFunction = {
+  myProperty: "This is my property",
+  logMyPropertyFunction: function () {
+    console.log(this.myProperty);
+  },
+};
+
+//this way using bind I can get the context from the object testFunction
+btnTeste.addEventListener(
+  "click",
+  testFunction.logMyPropertyFunction.bind(testFunction)
+);
 
 //Partial Application
+const addTax = (rate, value) => value + value * (rate / 100);
+
+console.log(addTax(10, 100));
+
+//15% importation tax for example
+const addTaxImportation = addTax.bind(null, 15);
+
+console.log(`My value with the importation tax is: ${addTaxImportation(100)}`);
+
