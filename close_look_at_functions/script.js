@@ -45,3 +45,19 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
 };
+
+const registerNewAnswer = function () {
+  let promptStr = poll.question + '\n';
+
+  for (let i in Object.entries(poll.options)) {
+    promptStr += poll.options[i] + '\n';
+  }
+
+  const option = prompt(promptStr);
+
+  console.log(`The option chosen was ${option}`);
+};
+
+const validateOptionPrompt = optionChosen => {};
+
+registerNewAnswer();
