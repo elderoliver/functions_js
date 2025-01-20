@@ -44,9 +44,29 @@ const poll = {
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
+
+  registerNewAnswer: function () {
+    let promptStr = poll.question + '\n';
+
+    for (let i in Object.entries(poll.options)) {
+      promptStr += poll.options[i] + '\n';
+    }
+
+    const option = Number(prompt(promptStr));
+
+    const validateOption = validateOptionPrompt(option);
+
+    if (validateOption) {
+      console.log(`you enter a valid option ${option}`);
+
+      this.answers[option] += 1;
+
+      console.log(this);
+    }
+  },
 };
 
-const registerNewAnswer = function () {
+/*const registerNewAnswer = function () {
   let promptStr = poll.question + '\n';
 
   for (let i in Object.entries(poll.options)) {
@@ -55,9 +75,30 @@ const registerNewAnswer = function () {
 
   const option = prompt(promptStr);
 
+  const validateOption = validateOptionPrompt(option);
+
+  if (validateOption) {
+  }
+
   console.log(`The option chosen was ${option}`);
+};*/
+
+const validateOptionPrompt = optionChosen => {
+  if (typeof optionChosen !== 'number') {
+    console.log('Plese enter a number!');
+    return false;
+  }
+
+  if (optionChosen < 0 || optionChosen > 3) {
+    console.log('Plese enter a valid option between 0 and 3!');
+    return false;
+  }
+
+  return true;
 };
 
-const validateOptionPrompt = optionChosen => {};
+//poll.registerNewAnswer();
 
-registerNewAnswer();
+const pollButton = document.querySelector('.poll');
+
+pollButton.addEventListener('click', poll.registerNewAnswer.bind(poll));
