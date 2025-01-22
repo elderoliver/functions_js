@@ -58,30 +58,19 @@ const poll = {
 
     if (validateOption) {
       console.log(`you enter a valid option ${option}`);
-
       this.answers[option] += 1;
+    }
 
-      console.log(this);
+    this.displayResults('string');
+  },
+  displayResults: function (type) {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
     }
   },
 };
-
-/*const registerNewAnswer = function () {
-  let promptStr = poll.question + '\n';
-
-  for (let i in Object.entries(poll.options)) {
-    promptStr += poll.options[i] + '\n';
-  }
-
-  const option = prompt(promptStr);
-
-  const validateOption = validateOptionPrompt(option);
-
-  if (validateOption) {
-  }
-
-  console.log(`The option chosen was ${option}`);
-};*/
 
 const validateOptionPrompt = optionChosen => {
   if (typeof optionChosen !== 'number') {
@@ -96,8 +85,6 @@ const validateOptionPrompt = optionChosen => {
 
   return true;
 };
-
-//poll.registerNewAnswer();
 
 const pollButton = document.querySelector('.poll');
 
